@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class BMKGBot extends AbilityBot {
 
     public static String BOT_USERNAME = "stueotue_bot";
-    public static String BOT_TOKEN = "1436447899:AAHVp-Hyzjj8oulNpR9YU5Bjgo4OLdFXuV0";
+    public static String BOT_TOKEN = System.getenv("BOT_TOKEN");
 
     public BMKGBot() {
         super(BOT_TOKEN, BOT_USERNAME);
