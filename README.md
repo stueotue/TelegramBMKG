@@ -6,11 +6,15 @@ Source data : https://data.bmkg.go.id/
 
 Under Construction
 
-###TODO :
+### TODO :
 [O] Earthquake (command : /pull_gempa).
+
 [ ] Message Detail
+
 [ ] Weather.
+
 [ ] Maritim.
+
 [ ] Clean and clear.
 
 
