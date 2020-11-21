@@ -5,6 +5,7 @@ import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.XML;
+import org.telegram.abilitybots.api.objects.MessageContext;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -39,10 +40,10 @@ public class BMKGBot extends AbilityBot {
                 .build();
     }
 
-    public Ability pullData() {
+    public Ability pullDataGempa() {
         return Ability
                 .builder()
-                .name("pull")
+                .name("pull_gempa")
                 .info("Pull the most recent earthquake data from BMKG")
                 .locality(ALL)
                 .privacy(PUBLIC)
@@ -112,6 +113,7 @@ public class BMKGBot extends AbilityBot {
             e.printStackTrace();
         }
     }
+
     public String displayData(HashMap data) {
         return String.format("Tanggal : %s \n"+
                 "Jam : %s \n" +
@@ -120,6 +122,26 @@ public class BMKGBot extends AbilityBot {
                 "Wilayah 1 : %s \n" +
                 "Potensi   : %s \n", data.get("tgl"), data.get("jam"), data.get("mag"),
                                      data.get("kedalaman"), data.get("wil1"), data.get("pot"));
+    }
+
+    private HashMap messageDetails(MessageContext context) {
+        HashMap<String, String> msgInfo = new HashMap<>();
+        msgInfo.put("firstName", context.user().getFirstName());
+        msgInfo.put("lastName", context.user().getLastName());
+        msgInfo.put("userName", context.user().getUserName());
+        msgInfo.put("id", String.valueOf(context.user().getId()));
+        msgInfo.put("message", String.valueOf(context.update().getMessage()));
+
+        return msgInfo;
+    }
+
+    private String displayMessage(HashMap msgInfo) {
+        return String.format("telegramID : %s \n" +
+                "userName : %s \n" +
+                "firstName : %s \n" +
+                "lastName : %s \n" +
+                "message : %s \n", msgInfo.get("id"), msgInfo.get("username"), msgInfo.get("firstName")
+                                 , msgInfo.get("lastName"), msgInfo.get("message"));
     }
 }
 
